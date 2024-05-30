@@ -1,4 +1,4 @@
-from flask import Flask, render_template,jsonify
+from flask import Flask, jsonify, render_template, send_from_directory
 
 app = Flask(__name__)
 
@@ -44,6 +44,9 @@ def hello_world():
 def list_jobs():
   return jsonify(JOBS)
 
+@app.route('/images/<path:filename>')
+def serve_image(filename):
+  return send_from_directory('static', filename)
 
 if __name__ =="__main__":
   app.run(host = '0.0.0.0', debug=True)
